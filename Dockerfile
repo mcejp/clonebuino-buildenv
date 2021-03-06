@@ -71,10 +71,16 @@ WORKDIR /opt
 RUN wget -qO- https://developer.arm.com/-/media/Files/downloads/gnu-rm/10-2020q4/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2 | tar -xj
 ENV PATH "/opt/gcc-arm-none-eabi-10-2020-q4-major/bin:$PATH"
 
+# Add RV32 toolchain
+WORKDIR /opt
+RUN wget -qO- https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases/download/v10.1.0-1.1/xpack-riscv-none-embed-gcc-10.1.0-1.1-linux-x64.tar.gz | tar -xz
+ENV PATH "/opt/xpack-riscv-none-embed-gcc-10.1.0-1.1/bin:$PATH"
+
 # Add built Verilator (globally)
 COPY --from=builder /tmp/verilator_dist /
 
 RUN arm-none-eabi-gcc --version
+RUN riscv-none-embed-gcc --version
 RUN verilator --version
 
 WORKDIR /work
