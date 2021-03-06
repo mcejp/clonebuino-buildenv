@@ -61,6 +61,7 @@ RUN apt-get update \
                         ccache \
                         git \
                         perl \
+                        unzip \
                         wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
