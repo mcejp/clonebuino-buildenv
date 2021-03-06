@@ -57,6 +57,7 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y \
                         bzip2 \
                         build-essential \
+                        ca-certificates \
                         git \
                         perl \
                         wget \
