@@ -66,10 +66,12 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Add ARM Cortex toolchain
 WORKDIR /opt
 RUN wget -qO- https://developer.arm.com/-/media/Files/downloads/gnu-rm/10-2020q4/gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2 | tar -xj
 ENV PATH "/opt/gcc-arm-none-eabi-10-2020-q4-major/bin:$PATH"
 
+# Add built Verilator (globally)
 COPY --from=builder /tmp/verilator_dist /
 
 RUN arm-none-eabi-gcc --version
